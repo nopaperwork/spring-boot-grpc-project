@@ -1,0 +1,44 @@
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+option java_multiple_files =true;
+option java_package ="com.nopaper.work";
+option java_outer_classname = "EmployeeProto";
+package com.nopaper.work.protobufapp;
+
+message Employee{
+  int32 id=1;
+  string name=2;
+  double salary=3;
+  repeated Department department=4;
+  map<string, string> addressMap=5;
+  bool isActive=6;
+  bytes profilePicture=7;
+  google.protobuf.Timestamp joinDate=8;
+}
+
+message Empty{
+
+}
+
+message Department{
+  int32 id=1;
+  string name=2;
+}
+
+//message EmployeeRequest{
+//  int32 id=1;
+//}
+
+message EmployeeList{
+  repeated Employee employees=1;
+}
+
+service EmployeeService {
+// Get Employee by ID
+  rpc getEmployee(Employee) returns (Employee);
+//  Add Employee
+  rpc addEmployee(Employee) returns (Employee);
+//  fetch All Employee
+  rpc getAllEmployees(Empty) returns (EmployeeList);
+}
